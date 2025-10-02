@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Daftar Berita</h2>
+<ul>
+  {% for b in berita %}
+    <li><strong>{{ b.judul }}</strong>: {{ b.isi }}</li>
+  {% endfor %}
+</ul>
+{% endblock %}

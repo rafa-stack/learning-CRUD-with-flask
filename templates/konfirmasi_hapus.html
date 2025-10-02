@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Konfirmasi Hapus Akun</h2>
+<p>Apakah kamu yakin ingin menghapus akun ini? Tindakan ini tidak bisa dibatalkan.</p>
+<form method="POST" action="{{ url_for('hapus_akun') }}">
+  <button type="submit">Ya, hapus akun saya</button>
+  <a href="{{ url_for('dashboard') }}">Batal</a>
+</form>
+{% endblock %}

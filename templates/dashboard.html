@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Dashboard</h2>
+<form method="POST">
+  {{ form.hidden_tag() }}
+  <p>{{ form.judul.label }}<br>{{ form.judul() }}</p>
+  <p>{{ form.isi.label }}<br>{{ form.isi() }}</p>
+  <p>{{ form.submit() }}</p>
+</form>
+
+<h3>Berita yang sudah ditambahkan:</h3>
+<ul>
+  {% for b in berita %}
+    <li>
+      <strong>{{ b.judul }}</strong>: {{ b.isi }}
+      <a href="{{ url_for('edit_berita', id=b.id) }}">Edit</a>
+      <a href="{{ url_for('delete_berita', id=b.id) }}">Hapus</a>
+    </li>
+  {% endfor %}
+</ul>
+
+<hr>
+<p>
+  <a href="{{ url_for('logout') }}">Logout</a> |
+  <a href="{{ url_for('konfirmasi_hapus_akun') }}">Hapus Akun</a>
+</p>
+
+{% endblock %}
