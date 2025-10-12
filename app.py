@@ -4,7 +4,7 @@ from models import db, User, Berita
 from forms import LoginForm, RegisterForm, BeritaForm
 from werkzeug.security import generate_password_hash, check_password_hash
 
-db = SQLAlchemy()
+
 app = Flask(__name__)
 app.config.from_object('config')
 db.init_app(app)
