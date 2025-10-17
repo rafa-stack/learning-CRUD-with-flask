@@ -3,11 +3,17 @@ from flask_sqlalchemy import SQLAlchemy
 from models import db, User, Berita
 from forms import LoginForm, RegisterForm, BeritaForm
 from werkzeug.security import generate_password_hash, check_password_hash
+from flask_migrate import Migrate, upgrade
+from flask.cli import with_appcontext
+import click
 
+
+db = SQLAlchemy()
 
 app = Flask(__name__)
 app.config.from_object('config')
 db.init_app(app)
+migrate = Migrate(app, db)
 
 with app.app_context():
     db.create_all()
@@ -102,4 +108,13 @@ def hapus_akun():
     return redirect(url_for('index'))
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    import os
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host='0.0.0.0', port=port)
+
+@click.command("db-upgrade")
+@with_appcontext
+def db_upgrade():
+    upgrade()
+
+app.cli.add_command(db_upgrade)
